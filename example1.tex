@@ -8,7 +8,10 @@
 
 \usepackage{times}
 \usepackage{graphicx}
+\usepackage{todonotes}
 \usepackage{empheq}
+
+\usepackage{blindtext}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -21,42 +24,104 @@ ${}^\dagger$Institut Jacques Monod, Université Paris Diderot, France
 }
 \email{romain.mueller@physics.ox.ac.uk}
 \abstract{%
-Experimental studies have uncovered the role of intrinsic wave generation in developmental processes during morphogenesis.
-Different mechanisms based on reaction-diffusion dynamics of chemical signalling have been traditionally suggested to govern such phenomena.
-Here, we demonstrate that an alternative mechanical route for wave generation exists in confined monolayers.
-By introducing an individual-based computational model that incorporates steric interactions, adhesion, as well as mechanical properties of individual cells, we are able to study the dynamics of cells in confinement.
-We observe many phenomena of interest, such as circulation, sustained oscillations and travelling waves. Furthermore, we analyse recent experimental data and show good agreement with our model.
+\blindtext
 }
 
 \begin{document}
 
 \makeheader
 
-\begin{posterrow}{2}
+\begin{posterrow}{1}
 
-\begin{posterbox}[A controlled model of tissue coordination]
-
+\begin{posterbox}[Title of this wide box]
+\blindtext
 \end{posterbox}
 
-\begin{posterbox}[Relevant references]
+\end{posterrow}
 
-\begin{itemize}
-  \item M. Nonomura, Study on Multicellular Systems Using a Phase Field Model. PLOS ONE 7(4): e33501 (2012).
-  \item B. Palmieri, Y. Bresler, D. Wirtz, and M. Grant, Multiple scale model for cell migration in monolayers: Elastic mismatch between cells enhances motility, Scientific Reports 5, 11745 (2015).
-  \item J. Notbohm, S. Banerjee, K. J. Utuje, B. Gweon, H. Jang, Y. Park, J. Shin, J. P. Butler, J. J. Fredberg, and M. C. Marchetti, Cellular Contraction and Polarization Drive Collective Cellular Motion, Biophysical Journal 110, 2729 (2016).
-  \item S. Henkes, Y. Fily, and M. C. Marchetti, Active jamming: Self-propelled soft particles at high density, Phys. Rev. E 84, 040301(R).
-\end{itemize}
-\vspace{68.5mm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{posterrow}{2}
+
+% works nicely with multicols and figures
+\begin{posterbox}[Title of that box]
+
+\begin{figure}
+  \includegraphics[draft,height=8\baselineskip,width=10\baselineskip]{figure1.pdf}
+  \hspace{2\baselineskip}
+  \includegraphics[draft,height=8\baselineskip,width=10\baselineskip]{figure2.pdf}
+  \caption{%
+  Yes, we can include figures for the simple minded among us!
+  }
+\end{figure}
+
+\begin{multicols}{2}
+\blindtext
+\end{multicols}
+\end{posterbox}
+
+% wow a box without a title!
+\begin{posterbox}
+
+\blindtext
+
+\blindtext
 
 \end{posterbox}
 
 \end{posterrow}
 
-\vfill\makefooter
+\begin{posterrow}{3}
+
+\begin{posterbox}[Wow!]
+\blindtext
+\end{posterbox}
+
+\begin{posterbox}[Such]
+\blindtext
+\end{posterbox}
+
+\begin{posterbox}[Boxes!]
+\blindtext
+\end{posterbox}
+
+\end{posterrow}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{posterrow}{2}
+\begin{posterbox}[Do not]
+\blindtext
+\end{posterbox}
+
+\begin{posterrow}{2}
+\begin{posterbox}[try this]
+\blindtext
+\end{posterbox}
+
+\begin{posterrow}{2}
+\begin{posterbox}[at]
+\end{posterbox}
+
+\begin{posterbox}[home]
+\end{posterbox}
+\end{posterrow}
+
+\begin{posterrow}{1}
+\begin{posterbox}[Yet another one here!]
+With an equation
+\begin{empheq}[box=\boxeq]{equation*}
+  \mathrm A = \mathrm B
+\end{empheq}
+courtesy of D.~Zeilberger.
+\end{posterbox}
+\end{posterrow}
+
+\end{posterrow}
+\end{posterrow}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makefooter
 
 \end{document}
-
-
-
-
-

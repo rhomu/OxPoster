@@ -165,6 +165,7 @@
 
 \providecommand{\makefooter}[1]{
 %
+\vfill%
 \fboxsep=0.4\spacing%
 \colorbox{oxblue}{%
 \color{white}%
@@ -173,15 +174,17 @@
 
 \newcounter{posterfigcount}
 
-%\renewcommand{\caption}[1]{\\ {\large  {\bfseries{Figure \arabic{posterfigcount}}:} #1}}
-\renewcommand{\caption}[1]{
-\begin{minipage}[t]{.95\colwidth}
-\large  {\bfseries{Figure \arabic{posterfigcount}}:} #1
-\end{minipage}
-\vspace{0.5\baselineskip}
-}
+\renewcommand{\caption}[1]{\\ {\bfseries{Figure \arabic{posterfigcount}}:} #1}
+%\renewcommand{\caption}[1]{
+%\begin{minipage}[t]{.95\colwidth}
+%\large  {\bfseries{Figure \arabic{posterfigcount}}:} #1
+%\end{minipage}
+%\vspace{0.5\baselineskip}
+%}
 
 \renewenvironment{figure}{\refstepcounter{posterfigcount}\begin{center}}{\end{center}}
 
 \providecommand{\references}{}
 \renewcommand{\references}{\small \bibliographystyle{plain}}
+
+\normalsize
