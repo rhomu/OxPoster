@@ -1,0 +1,187 @@
+\usepackage[margin=0pt]{geometry}
+\usepackage{ifthen}
+\usepackage{graphicx}
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{changepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% general style
+
+\parindent=0pt
+
+% the official oxford blue
+\definecolor{oxblue}{RGB}{28,40,75}
+
+% light gray background
+\pagestyle{empty}
+\pagecolor{gray!10}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% columns and boxes
+
+% fix to allow single col multicols
+\let\multicolmulticols\multicols
+\let\endmulticolmulticols\endmulticols
+
+\RenewDocumentEnvironment{multicols}{mO{}}
+{%
+\ifnum#1=1
+  #2%
+\else % More than 1 column
+  \multicolmulticols{#1}[#2]
+\fi
+}
+{%
+\ifnum#1=1
+\else % More than 1 column
+  \endmulticolmulticols
+\fi
+}
+
+% spacing between boxes
+\newlength{\spacing}
+\setlength{\spacing}{0.02\textwidth}
+
+% correction for nested posterrow environments (internal)
+\newlength{\spacingcorr}
+\setlength{\spacingcorr}{0pt}
+
+% single row
+\newenvironment{posterrow}[1]
+{%
+\begin{adjustwidth}{\spacing-\spacingcorr}{\spacing-\spacingcorr}%
+\setlength{\columnsep}{\spacing}%
+\setlength{\multicolsep}{.5\spacing}%
+\setlength{\spacingcorr}{\spacing}%
+\begin{multicols}{#1}%
+}%
+{%
+\end{multicols}%
+\end{adjustwidth}%
+}
+
+% box
+\newtcolorbox{posterbox}[1][]{
+  colback=white,
+  colframe=oxblue!75!black,
+  fonttitle=\bfseries,
+  title=#1,
+  boxsep=.4\spacing,
+  text fill
+}
+
+% abstract box
+\newtcolorbox{abstractbox}[1][]{
+  colback=white,
+  colframe=oxblue!75!black,
+  fonttitle=\bfseries,
+  title=#1,
+  boxsep=.4\spacing,
+  arc=0pt
+}
+
+% equation box (use with empheq)
+\newtcbox{\boxeq}[1][]{%
+  nobeforeafter, math upper, tcbox raise base,
+  enhanced, colframe=oxblue!30!black,
+  colback=oxblue!5, boxrule=1pt,
+  #1
+}
+
+\newcommand{\cfbox}[2]{%
+    \colorlet{currentcolor}{.}%
+    {\color{#1}%
+    \fbox{\color{currentcolor}#2}}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% header and footer
+
+\newcommand{\postertitle}{}
+\newcommand{\posterauthor}{}
+\newcommand{\posteraddress}{}
+\newcommand{\posteremail}{}
+\newcommand{\posterabstract}{}
+\providecommand{\title}[1]{#1}
+\providecommand{\author}[1]{#1}
+\providecommand{\address}[1]{#1}
+\providecommand{\email}[1]{#1}
+\providecommand{\abstract}[1]{#1}
+\renewcommand{\title}[1]{\renewcommand{\postertitle}{#1}}
+\renewcommand{\author}[1]{\renewcommand{\posterauthor}{#1}}
+\renewcommand{\address}[1]{\renewcommand{\posteraddress}{#1}}
+\renewcommand{\email}[1]{\renewcommand{\posteremail}{#1}}
+\renewcommand{\abstract}[1]{\renewcommand{\posterabstract}{#1}}
+
+\newcommand{\makeheader}{%
+%
+\newlength{\figsize}%
+\newlength{\midsize}%
+\newlength{\rulesep}%
+\setlength{\figsize}{0.15\textwidth}%
+\setlength{\midsize}{\textwidth}%
+\addtolength{\midsize}{-\figsize}%
+\addtolength{\midsize}{-0.012\textwidth}%
+\setlength{\rulesep}{0.07\baselineskip}%
+%\posterrule \\%
+\colorbox[RGB]{28,40,75} {%
+%\colorbox[rgb]{1,1,1} { % ensure a white background box%
+\begin{tabular}{cc}%
+\begin{minipage}{\figsize}%
+\vspace*{1cm}%
+\hspace{.7cm}%
+\cfbox{white}{\includegraphics[width=\figsize, height=\figsize]{oxford}}%
+\end{minipage} &%
+ \hspace{40px}%
+ \begin{minipage}{\midsize}%
+ \color{white}%
+ \raisebox{\rulesep}{\ }%
+  \begin{center}
+  \ifthenelse{\equal{\postertitle}{}}{}{\vspace{\baselineskip}{\Huge \textbf{\postertitle}}\vspace{.6\baselineskip}}
+  
+  \ifthenelse{\equal{\posterauthor}{}}{}{{\LARGE \posterauthor}\vspace{.6\baselineskip}}
+  
+  \ifthenelse{\equal{\posteraddress}{}}{}{{\Large \posteraddress}\vspace{.6\baselineskip}}
+  
+  \ifthenelse{\equal{\posteremail}{}}{}{{\Large ${}^*$email: \texttt{\posteremail}}\vspace{.6\baselineskip}}
+  \end{center}
+% \raisebox{15\rulesep}{\ }
+ %\posterrule
+  \end{minipage} \\ %
+  ~%
+\end{tabular}%
+}\\%
+\vspace{\spacing}%
+\ifthenelse{\equal{\posterabstract}{}}{}{{%
+\begin{posterrow}{1}%
+\begin{abstractbox}%
+\large\posterabstract%
+\end{abstractbox}%
+\end{posterrow}%
+}}
+}
+
+\providecommand{\makefooter}[1]{
+%
+\fboxsep=0.4\spacing%
+\colorbox{oxblue}{%
+\color{white}%
+\makebox[\textwidth][l]{#1}%
+}}
+
+\newcounter{posterfigcount}
+
+%\renewcommand{\caption}[1]{\\ {\large  {\bfseries{Figure \arabic{posterfigcount}}:} #1}}
+\renewcommand{\caption}[1]{
+\begin{minipage}[t]{.95\colwidth}
+\large  {\bfseries{Figure \arabic{posterfigcount}}:} #1
+\end{minipage}
+\vspace{0.5\baselineskip}
+}
+
+\renewenvironment{figure}{\refstepcounter{posterfigcount}\begin{center}}{\end{center}}
+
+\providecommand{\references}{}
+\renewcommand{\references}{\small \bibliographystyle{plain}}
