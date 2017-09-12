@@ -5,6 +5,7 @@
 \usepackage{xcolor}
 \usepackage{multicol}
 \usepackage{changepage}
+\usepackage{authblk}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % general style
@@ -100,17 +101,17 @@
 % header and footer
 
 \newcommand{\postertitle}{}
-\newcommand{\posterauthor}{}
+\newcommand{\posterauthors}{}
 \newcommand{\posteraddress}{}
 \newcommand{\posteremail}{}
 \newcommand{\posterabstract}{}
 \providecommand{\title}[1]{#1}
-\providecommand{\author}[1]{#1}
+\providecommand{\authors}[1]{#1}
 \providecommand{\address}[1]{#1}
 \providecommand{\email}[1]{#1}
 \providecommand{\abstract}[1]{#1}
 \renewcommand{\title}[1]{\renewcommand{\postertitle}{#1}}
-\renewcommand{\author}[1]{\renewcommand{\posterauthor}{#1}}
+\renewcommand{\authors}[1]{\renewcommand{\posterauthors}{#1}}
 \renewcommand{\address}[1]{\renewcommand{\posteraddress}{#1}}
 \renewcommand{\email}[1]{\renewcommand{\posteremail}{#1}}
 \renewcommand{\abstract}[1]{\renewcommand{\posterabstract}{#1}}
@@ -141,7 +142,11 @@
   \begin{center}
   \ifthenelse{\equal{\postertitle}{}}{}{\vspace{\baselineskip}{\Huge \textbf{\postertitle}}\vspace{.6\baselineskip}}
   
-  \ifthenelse{\equal{\posterauthor}{}}{}{{\LARGE \posterauthor}\vspace{.6\baselineskip}}
+  {\LARGE
+   \lineskip .5em%
+   \begin{tabular}[t]{c}%
+     \@author
+   \end{tabular}\par}
   
   \ifthenelse{\equal{\posteraddress}{}}{}{{\Large \posteraddress}\vspace{.6\baselineskip}}
   
